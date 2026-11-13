@@ -12,18 +12,41 @@
 Review the code **as submitted in the original examination**. Do not change the original repository, branch or pull request. Check your own Group A or Group B examination paper and award marks only for evidence present in the original submission.
 
 ### Task 1 — /40
-**My mark:**  
+**My mark: 23** 
+
 **Evidence from the original code (files, methods, working or missing requirements):**
+What went right:
+- Model was correctly done and is a real JPA entity with its relevant data entries.
+- Repository was also done and initialized correctly.
+- @NotBlank on the organiser name is correct for the "not blank" rule.
+- The getters work (getAttendeeCount, getStatus, getOrgName, and Lombok's @Getter on roomId).
+- It actually compiles
 
-### Task 2 — /40
-**My mark:**  
-**Evidence from the original code:**
+What went wrong: 
+- some getters and setters are empty meaning bookings arent saved correctly 
+- @Id shouldn't encompass attendeeCount
 
-### Task 3 — /20
-**My mark:**  
-**Evidence from the original code:**
 
-**Total self-assessed original examination mark: /100**
+
+### Task 2 — 10 /40
+**My mark:0**  
+I was unable to progress to this task as there was a major SDK issue and IntelliJ kept locking me out of building and running. rendering me from running the code at all. 
+Due to this i was not even able to check what was wrong with task 1 etc. This was a major handicap in the exam that definitely needs to get sorted for the next labs. 
+What went right: 
+- Repository was initialized correctly
+- Service was written up properly and given time the imports that were unused would've been used correctly.
+
+What went wrong:
+- No Controller set up endpoints do not exist.
+- No client was written
+- function to save data locally to repository was never called.
+### Task 3 — 3/20
+**My mark:0**
+ 
+Task 3 never reached due to same issues i mentioned in task 2 but the trajectory and foundations was set with the imports in the service class
+yet a 3/20 would be too optimistic.
+
+**Total self-assessed original examination mark: 36/100**
 
 **Checkpoint:** Commit this completed self-assessment as the **first review commit in your new repository**, before you modify or add application code. The lecturer decides the official original examination mark.
 
