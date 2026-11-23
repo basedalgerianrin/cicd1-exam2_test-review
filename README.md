@@ -137,9 +137,19 @@ Use Swagger UI or another HTTP client. For **at least four meaningful checks**, 
 
 **What did I understand during the examination but struggle to implement?**
 
+Mainly Time constraint was my biggest struggle. also the SDK lock was also a major issue. 
+From this i noted whether it was code issue or project creation issue.
+
 **Which Spring Boot, JPA, validation, JPQL or OpenFeign concept became clearer after correcting my code? Give a specific example.**
+ - Primitive vs Long 
+ - validaion became clearer and how it works
+ - Entity vs DTO on why response and requests should be in different classes.
 
 **What will I do differently in my next coding test or API development task?**
+
+- Check if the IDE is set up correctly before the exam
+- Build in layers and run tests on each layer
+- Smarter coding exam tactics
 
 ## Review lab assessment — 20 marks
 
@@ -158,6 +168,7 @@ If the same approach as OOP is adopted, the review could recover **up to 30% of 
 **Marks recovered = (100 − official original exam mark) × 0.30 × (review lab mark ÷ 20)**
 
 Example: exam **40/100** and review **16/20** → **14.4 recovered marks**, revised exam **54.4/100**. This is **not an approved CICD-1 policy unless confirmed by the lecturer**. The original official exam mark—not your self-awarded grade—is used in the calculation.
+proposed mark after recovery: 40/100 minimum. 
 
 ## Submission
 
