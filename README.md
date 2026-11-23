@@ -95,28 +95,39 @@ What changed:
 Use Swagger UI or another HTTP client. For **at least four meaningful checks**, record the request/input, expected result, actual HTTP status/response, and pass/fail. Include unsuccessful cases; a running application alone is not enough.
 
 **Test 1 — successful booking request:**
-- Request / input:
-- Expected:
-- Actual HTTP status / body:
-- Pass / fail:
+- Request / input:  `POST /api/bookings` with `{"roomId":1,"organiserName":"Aoife Byrne","attendeeCount":18}`
+- Expected: 201 Created. Booking saved with status ACTIVE and ID generated.
+- Actual HTTP status / body: ing saved with status ACTIVE and a generated ID
+- Actual HTTP status / body: `201` `{"attendeeCount":18,"id":3,"organiserName":"Aoife Byrne","roomId":1,"status":"ACTIVE"}`
+- Pass / fail: **PASS**
 
 **Test 2 — invalid input or excessive attendee count:**
-- Request / input:
-- Expected:
-- Actual HTTP status / body:
-- Pass / fail:
+- Request / input: `POST /api/bookings` with `{"roomId":1,"organiserName":"Aoife Byrne","attendeeCount":30}`
+- Expected: 400. 30 exceeds the room capacity of 24
+- Actual HTTP status / body: 400 `{"status":400,"error":"Bad Request","message":"Attendee count 30 exceeds room capacity 24","path":"/api/bookings"}`
+- Pass / fail: **PASS**
+
+- Request / input: `POST /api/bookings` with `{"organiserName":"A","attendeeCount":0}`
+- Expected: 400 from validation
+- Actual HTTP status / body: `400` `{"status":400,"error":"Bad Request","message":"Validation failed for object='bookingRequest'. Error count: 3","path":"/api/bookings"}`
+- Pass / fail: **PASS**
 
 **Test 3 — missing booking or room:**
-- Request / input:
-- Expected:
-- Actual HTTP status / body:
-- Pass / fail:
+- Request / input: `GET /api/bookings/9999`
+- Expected: 404 with meaningful message
+- Actual HTTP status / body: `404` `{"status":404,"error":"Not Found","message":"Booking 9999 not found","path":"/api/bookings/9999"}`
+- Pass / fail: **PASS**
+
+- Request / input: `POST /api/bookings` with `{"roomId":999,"organiserName":"Aoife Byrne","attendeeCount":5}`
+- Expected: 404. Room Service has no room 999
+- Actual HTTP status / body: first run `500` (uncaught Feign exception). After fix: `BookingService.create`: `404` `{"status":404,"error":"Not Found","message":"Room 999 not found","path":"/api/bookings"}`
+- Pass / fail: Case 1: **FAIL** Case 2:  **PASS**
 
 **Test 4 — requirement specific to my group:**
-- Request / input:
-- Expected:
-- Actual HTTP status / body:
-- Pass / fail:
+- Request / input: `GET /api/bookings/1`
+- Expected: 200
+- Actual HTTP status / body:  `{"attendeeCount":18,"id":1,"organiserName":"Aoife Byrne","roomId":1,"status":"ACTIVE"}`
+- Pass / fail: **PASS**
 
 **Group A:** Demonstrate `GET /api/bookings/search?roomName=...` using an exact room name, bookings ordered by attendee count descending, and an empty list for no matches. Add checks if necessary to show all three behaviours.
 
