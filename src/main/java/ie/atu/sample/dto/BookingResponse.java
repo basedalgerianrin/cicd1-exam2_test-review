@@ -8,7 +8,7 @@ public class BookingResponse {
     private String organiserName;
     private Long roomId;
     private String status;
-    private Long attendeeCount;
+    private int attendeeCount;
 }
 
 /*
