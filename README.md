@@ -58,10 +58,38 @@ Describe **two or three important problems** in your original code. For each, ex
 
 **Problem and correction 1:**
 
+In Booking Model @Id @GeneratedValue annotations were on attendeeCount so primary key was the number of attendees and no booking ID at all.
+Two bookings with 18 attendees would collide. The setters also had empties bodies, so no value was ever actually stored.
+Status was also capitalized which broke property name.
+
+Booking package now has 
+- @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id
+- attendeeCount is an int
+- lombok generated working getters and setters with @Data
+
+Database now generates actual working unique IDs for every booking so save() creates a new row each time and findById has real key to search for.
+Working setters mean the values I set before save() are actually stroed.
+
 **Problem and correction 2:**
+
+Bookingdto was a single class used for everything. It required bookingID and Status from the client, and it had no getters and setters.
+@NotNull was on a primitive long instead of object Long so long can never fail. There was also no @Size(2, 60) on the name or @Positive on attendee count.
+This did not meet validation rules in Task 1.
+
+What changed:
+- Created BookingRequest class with @NotNull Long roomId
+- @NotBlank @Size(min = 2, max = 60) organiserName
+- @Positive attendeeCount
+- Created seperate BookingResponse for Output.
 
 **Problem and correction 3 (optional):**
 
+Previous submission had empty service, no controller and Feign client. No endpoint existed so no way of making or recieving booking.
+
+What changed: 
+- Created RoomClient 
+- BookingService.create
+- BookingController with POST/GET
 ## 3. API testing and evidence
 
 Use Swagger UI or another HTTP client. For **at least four meaningful checks**, record the request/input, expected result, actual HTTP status/response, and pass/fail. Include unsuccessful cases; a running application alone is not enough.
